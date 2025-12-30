@@ -29,7 +29,7 @@ const ChatAssistant: React.FC<ChatAssistantProps> = ({ lang }) => {
             placeholder: 'كيفك ؟',
             assistantName: 'مساعد سند',
             intro: 'هلا والله! 👋 أنا مساعدك الذكي في مركز سند. تفضل بالسؤال عن أي رحلة من رحلاتنا.',
-            triggerText: 'مساعد سند الذكي',
+            triggerText: ' تحدث معى لاتتردد !',
             error: 'عذراً، حدث خطأ في الاتصال. يرجى المحاولة لاحقاً.',
             unknown: 'عذراً، لم أستطع فهم السؤال. هل يمكنك إعادة صياغته؟'
         },

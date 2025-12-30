@@ -8,8 +8,8 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ lang }) => {
   const content = {
       ar: {
-          welcome: 'هلا وغلا معاك',
-          secondLine: 'سند.. إذا أردت التحدث لا تتردد',
+          welcome: 'هلا وغلا ',
+          secondLine: 'معك سند.. إذا أردت التحدث لا تتردد  ',
           title: 'مركز سند نموذجاً رائداً في رعاية وتمكين المستفيدين بالجامعة.',
       },
       en: {
