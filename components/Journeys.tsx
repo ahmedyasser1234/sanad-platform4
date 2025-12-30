@@ -5,18 +5,26 @@ interface JourneysProps {
     lang: 'ar' | 'en';
 }
 
-// --- CONFIGURATION ---
-// Place your icon images in the public folder and update these names
+// --- OPTION 1: Absolute paths ---
 const JOURNEY_ICONS = {
-    admissions: "./images/Asset 1.png",
-    university: "./images/Asset 2.png",
-    financial: "./images/Asset 3.png",
-    academic: "./images/Asset 4.png",
-    values: "./images/Asset 5.png"
+    admissions: "/images/Asset 1.png",
+    university: "/images/Asset 2.png",
+    financial: "/images/Asset 3.png",
+    academic: "/images/Asset 4.png",
+    values: "/images/Asset 5.png"
 };
 
-// Configuration for the decorative rocket image
-const DECORATIVE_ROCKET_ICON = "./images/Asset 9.png";
+const DECORATIVE_ROCKET_ICON = "/images/Asset 9.png";
+
+// --- OPTION 2: With process.env.PUBLIC_URL ---
+// const JOURNEY_ICONS = {
+//     admissions: `${process.env.PUBLIC_URL}/images/Asset 1.png`,
+//     university: `${process.env.PUBLIC_URL}/images/Asset 2.png`,
+//     financial: `${process.env.PUBLIC_URL}/images/Asset 3.png`,
+//     academic: `${process.env.PUBLIC_URL}/images/Asset 4.png`,
+//     values: `${process.env.PUBLIC_URL}/images/Asset 5.png`
+// };
+// const DECORATIVE_ROCKET_ICON = `${process.env.PUBLIC_URL}/images/Asset 9.png`;
 
 const Journeys: React.FC<JourneysProps> = ({ lang }) => {
     
@@ -92,26 +100,30 @@ const Journeys: React.FC<JourneysProps> = ({ lang }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
             {journeys.map((journey) => (
                 <div key={journey.id} className="relative group h-full flex flex-col items-center">
-                     {/* Card Container - White dominant with small #E4D3FC at Top-Left */}
+                     {/* Card Container */}
                     <div className="w-full flex-1 bg-gradient-to-tl from-white from-50% to-[#E4D3FC] rounded-[2.5rem] p-5 py-10 shadow-[0_15px_35px_-12px_rgba(0,0,0,0.08)] hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-white flex flex-col items-center justify-center text-center min-h-[240px]">
                         
-                        {/* Icon Area - Image */}
+                        {/* Icon Area */}
                         <div className="mb-6 transform transition-transform group-hover:scale-110 duration-300">
                             <img 
                                 src={journey.icon} 
                                 alt={journey.title}
                                 className="w-24 h-24 object-contain drop-shadow-sm" 
+                                onError={(e) => {
+                                    console.error(`Failed to load image: ${journey.icon}`);
+                                    e.currentTarget.style.display = 'none';
+                                }}
                             />
                         </div>
                         
-                        {/* Title - Gradient Text */}
+                        {/* Title */}
                         <h3 className="text-2xl font-bold leading-tight px-1 min-h-[4rem] flex items-center justify-center bg-gradient-to-r from-[#a855f7] to-[#3b82f6] bg-clip-text text-transparent">
                             {journey.title}
                         </h3>
                         
                     </div>
 
-                    {/* Button - Outer Position */}
+                    {/* Button */}
                     <button className="mt-8 bg-gradient-to-r from-[#be63f9] to-[#4b74f6] hover:opacity-95 text-white text-xl font-bold py-2.5 px-14 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105 active:scale-95 whitespace-nowrap">
                         {t.btn}
                     </button>
@@ -119,14 +131,14 @@ const Journeys: React.FC<JourneysProps> = ({ lang }) => {
             ))}
         </div>
         
-        {/* Decorative Rocket (Replaced SVG with Image) */}
-        {/* We flip the direction of the rocket container based on lang */}
+        {/* Decorative Rocket */}
         <div className={`flex justify-center md:justify-start relative mt-4 ${lang === 'ar' ? 'md:mr-32 lg:mr-64' : 'md:ml-32 lg:ml-64 transform scale-x-[-1]'}`}>
              <div className="w-20 h-20 md:w-32 md:h-32 transform rotate-[45deg] relative animate-pulse" style={{ animationDuration: '4s' }}>
                 <img 
                     src={DECORATIVE_ROCKET_ICON} 
                     alt="Rocket" 
                     className="w-full h-full object-contain drop-shadow-md"
+                    onError={(e) => console.error(`Failed to load rocket: ${DECORATIVE_ROCKET_ICON}`)}
                 />
              </div>
         </div>
